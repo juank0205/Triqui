@@ -51,18 +51,18 @@ function setBoard(board, posX, posY, nuevo){
 }
 
 //VALIDATE IF ANY PLAYER HAS WON
-function checkWinner(board, caracter){
+function checkWinner(board){
     var i = 0;
     for (i=0; i<3; i++){
         //HORIZONTAL
-        if ((board[i][0] == board[i][1]) == board[i][2]){
+        if ((board[i][0] == board[i][1]) && (board[i][2] == board[i][0]) && (board[i][1] == board[i][2])){
             if ((board[i][0] != ' ') && (board[i][1] != ' ') && (board[i][2] != ' ')){
                 return 0;
             }
         }
         
         //VERTICAL
-        if ((board[0][i] == board[1][i]) == board[2][i]){
+        if ((board[0][i] == board[1][i]) && (board[0][i] == board[2][i]) && (board[1][i] == board[2][i])){
             if ((board[0][i] != ' ') && (board[1][i] != ' ') && (board[2][i] != ' ')){
                 return 0;
             }
@@ -70,14 +70,14 @@ function checkWinner(board, caracter){
     }
     
     //DIAGONAL 1
-    if ((board[0][0] == board[1][1]) == board[2][2]){
+    if ((board[0][0] == board[1][1]) && (board[2][2] == board[0][0]) && (board[1][1] == board[2][2])){
         if ((board[0][0] != ' ') && (board[1][1] != ' ') && (board[2][2] != ' ')){
             return 0;
         }
     }
 
     //DIAGONAL 2
-    if ((board[2][0] == board[1][1]) == board[0][2]){
+    if ((board[2][0] == board[1][1]) && (board[0][2] == board[2][0]) && (board[1][1] == board[0][2])){
         if ((board[2][0] != ' ') && (board[1][1] != ' ') && (board[0][2] != ' ')){
             return 0;
         }
@@ -97,14 +97,14 @@ function triqui(board, turn){
 
         if ((turn % 2) ==  0){
             caracter = 'X'
-            if (checkWinner(board, caracter) == 0){
-                console.log("GANA JUGADOR 1");
+            if (checkWinner(board) == 0){
+                console.log("GANA JUGADOR 2");
                 return 0;
             }
         } else{
             caracter = 'O'
-            if (checkWinner(board, caracter) == 0){
-                console.log("GANA JUGADOR 2");
+            if (checkWinner(board) == 0){
+                console.log("GANA JUGADOR 1");
                 return 0;
             }
         }
