@@ -1,2 +1,2 @@
 ## TRIQUI
-# Triqui javascript
+### Triqui javascript
