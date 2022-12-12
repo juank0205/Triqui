@@ -4,10 +4,16 @@ const readline = require('readline-sync');
 function input(question){
     var answer = readline.question(question);
     answer = parseInt(answer);
-    if ((answer > 0) && (answer<4)){
-        return answer;
+    if ((answer > 0) && (answer<10)){
+        return translatePosition(answer);
     }
-    return -1;
+    return 1;
+}
+
+function translatePosition(pos){
+    y = ((pos-1)%3);
+    x = Math.floor((pos-1)/3);
+    return [x, y]
 }
 
 //SET ALL THE VALUES OF THE MATRIX TO ' '
@@ -42,8 +48,8 @@ function printBoard(board, turn){
 
 //SET THE MATRIX IN POSITION posX, posY TO A NEW CHARACTER
 function setBoard(board, posX, posY, nuevo){
-    if(board[posY-1][posX-1] == ' '){
-        board[posY-1][posX-1] = nuevo;
+    if(board[posX][posY] == ' '){
+        board[posX][posY] = nuevo;
         return 0;
     } else{
         return 1;
@@ -109,13 +115,12 @@ function triqui(board, turn){
             }
         }
 
-        posX = input('Ingrese la posicion en X: ');
-        posY = input('Ingrese la posicion en Y: ');
-        if((posX == -1) || (posY == -1)){
-            console.log("Ingrese una posicion valida")
+        pos = input('Ingrese la posicion: ');
+        if (pos == -1){
+            console.log("Ingrese una posicion valida");
             continue;
         }
-        if (setBoard(board, posX, posY, caracter) == 1){
+        if (setBoard(board, pos[0], pos[1], caracter) == 1){
             console.log("Ingrese una jugada valida")
             continue;
         }
